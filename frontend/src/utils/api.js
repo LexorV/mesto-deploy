@@ -100,7 +100,7 @@ class Api {
 const api = new Api({
   address: 'https://api.mesto-deploy.lex-v.ru',
   groupId: `cohort0`,
-  token: `80a75492-21c5-4330-a02f-308029e94b63`,
+  token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzQ0OWJhY2NiZjM5ODJmZDQ4ODcwMDkiLCJpYXQiOjE2NjU0NDA2OTh9.abjlM22wK_bcDt3AwQKyVfrvU_Z4txLNMcfUmsxSNIk`,
 });
 
 export default api;
