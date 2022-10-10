@@ -98,7 +98,7 @@ class Api {
 }
 
 const api = new Api({
-  address: 'https://nomoreparties.co',
+  address: 'https://api.mesto-deploy.lex-v.ru',
   groupId: `cohort0`,
   token: `80a75492-21c5-4330-a02f-308029e94b63`,
 });

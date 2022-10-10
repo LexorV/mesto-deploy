@@ -1,5 +1,5 @@
 import 'dotenv/config';
-
+import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
@@ -12,6 +12,9 @@ import routes from './routes';
 const { PORT = 3000 } = process.env;
 const app = express();
 mongoose.connect(DB_ADDRESS);
+app.use(cors({
+  origin: '*',
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
