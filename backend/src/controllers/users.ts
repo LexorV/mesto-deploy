@@ -18,14 +18,7 @@ const login = (req: Request, res: Response, next: NextFunction) => {
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, JWT_SECRET);
       // Студенты могут записывать jwt в куку, либо же отправлять в теле ответа. Оба варианта - ок
-      res
-        .cookie('jwt', token, {
-          // jwt токен выпускается на определённый срок (например, 7 дней), а не даётся бессрочно
-          maxAge: 3600000,
-          httpOnly: true,
-          sameSite: true,
-        })
-        .send({ data: user.toJSON() });
+      res.send({ token: token });
     })
     // UnauthorizedError теперь возвращается из findUserByCredentials.
     // Её можно смело передавать в next

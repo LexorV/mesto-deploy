@@ -13,7 +13,7 @@ class Api {
   }
 
   getCardList() {
-    return fetch(`${this._address}/${this._groupId}/cards`, {
+    return fetch(`${this._address}/cards`, {
       headers: {
         authorization: this._token,
       },
@@ -22,7 +22,7 @@ class Api {
   }
 
   addCard({ name, link }) {
-    return fetch(`${this._address}/${this._groupId}/cards`, {
+    return fetch(`${this._address}/cards`, {
       method: 'POST',
       headers: {
         authorization: this._token,
@@ -37,7 +37,7 @@ class Api {
   }
 
   removeCard(cardID) {
-    return fetch(`${this._address}/${this._groupId}/cards/${cardID}`, {
+    return fetch(`${this._address}/cards/${cardID}`, {
       method: 'DELETE',
       headers: {
         authorization: this._token,
@@ -56,7 +56,7 @@ class Api {
   }
 
   setUserInfo({ name, about }) {
-    return fetch(`${this._address}/${this._groupId}/users/me`, {
+    return fetch(`${this._address}/users/me`, {
       method: 'PATCH',
       headers: {
         authorization: this._token,
@@ -71,7 +71,7 @@ class Api {
   }
 
   setUserAvatar({ avatar }) {
-    return fetch(`${this._address}/${this._groupId}/users/me/avatar`, {
+    return fetch(`${this._address}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
         authorization: this._token,
@@ -86,7 +86,7 @@ class Api {
 
   changeLikeCardStatus(cardID, like) {
     // Обычная реализация: 2 разных метода для удаления и постановки лайка.
-    return fetch(`${this._address}/${this._groupId}/cards/like/${cardID}`, {
+    return fetch(`${this._address}/cards/like/${cardID}`, {
       method: like ? 'PUT' : 'DELETE',
       headers: {
         authorization: this._token,
@@ -100,7 +100,7 @@ class Api {
 const api = new Api({
   address: 'https://api.mesto-deploy.lex-v.ru',
   groupId: `cohort0`,
-  token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzQ0OWJhY2NiZjM5ODJmZDQ4ODcwMDkiLCJpYXQiOjE2NjU0NDA2OTh9.abjlM22wK_bcDt3AwQKyVfrvU_Z4txLNMcfUmsxSNIk`,
+  token: localStorage.getItem('jwt'),
 });
 
 export default api;
