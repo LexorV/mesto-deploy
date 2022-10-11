@@ -26,6 +26,7 @@ export const login = (email, password) => {
   })
   .then(getResponse)
   .then((data) => {
+    console.log(data);
     localStorage.setItem('jwt', data.token)
     return data;
   })

@@ -17,7 +17,8 @@ const login = (req: Request, res: Response, next: NextFunction) => {
   return User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, JWT_SECRET);
-      // Студенты могут записывать jwt в куку, либо же отправлять в теле ответа. Оба варианта - ок
+      console.log(token);
+      // Студенты могут записывать jwt в куку, либо же отправлять втеле ответа. Оба варианта - ок
       res.send({ token: token });
     })
     // UnauthorizedError теперь возвращается из findUserByCredentials.
