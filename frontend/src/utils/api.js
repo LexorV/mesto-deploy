@@ -13,19 +13,21 @@ class Api {
   }
 
   getCardList() {
+    const token = localStorage.getItem('jwt')
     return fetch(`${this._address}/cards`, {
       headers: {
-        authorization: this._token,
+        authorization: token,
       },
     })
       .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
   }
 
   addCard({ name, link }) {
+    const token = localStorage.getItem('jwt')
     return fetch(`${this._address}/cards`, {
       method: 'POST',
       headers: {
-        authorization: this._token,
+        authorization: token,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -37,29 +39,32 @@ class Api {
   }
 
   removeCard(cardID) {
+    const token = localStorage.getItem('jwt')
     return fetch(`${this._address}/cards/${cardID}`, {
       method: 'DELETE',
       headers: {
-        authorization: this._token,
+        authorization: token,
       },
     })
       .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
   }
 
   getUserInfo() {
+    const token = localStorage.getItem('jwt')
     return fetch(`${this._address}/users/me`, {
       headers: {
-        authorization: this._token,
+        authorization: token,
       },
     })
       .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
   }
 
   setUserInfo({ name, about }) {
+    const token = localStorage.getItem('jwt')
     return fetch(`${this._address}/users/me`, {
       method: 'PATCH',
       headers: {
-        authorization: this._token,
+        authorization: token,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -71,10 +76,11 @@ class Api {
   }
 
   setUserAvatar({ avatar }) {
+    const token = localStorage.getItem('jwt')
     return fetch(`${this._address}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
-        authorization: this._token,
+        authorization: token,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -85,11 +91,12 @@ class Api {
   }
 
   changeLikeCardStatus(cardID, like) {
+    const token = localStorage.getItem('jwt')
     // Обычная реализация: 2 разных метода для удаления и постановки лайка.
     return fetch(`${this._address}/cards/like/${cardID}`, {
       method: like ? 'PUT' : 'DELETE',
       headers: {
-        authorization: this._token,
+        authorization: token,
         'Content-Type': 'application/json',
       },
     })
@@ -98,7 +105,7 @@ class Api {
 }
 
 const api = new Api({
-  address: 'https://api.mesto-deploy.lex-v.ru',
+  address: 'http://localhost:3001',
   groupId: `cohort0`,
   token: localStorage.getItem('jwt'),
 });

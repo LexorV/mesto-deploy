@@ -51,14 +51,14 @@ const createUser = (req: Request, res: Response, next: NextFunction) => {
 // GET /users
 const getUsers = (req: Request, res: Response, next: NextFunction) => {
   User.find({})
-    .then((users) => res.send({ data: users }))
+    .then((users) => res.send( users ))
     .catch(next);
 };
 
 const getUserData = (id: string, res: Response, next: NextFunction) => {
   User.findById(id)
     .orFail(() => new NotFoundError('Пользователь по заданному id отсутствует в базе'))
-    .then((users) => res.send({ data: users }))
+    .then((users) => res.send(users))
     .catch(next);
 };
 
@@ -76,7 +76,7 @@ const updateUserData = (req: Request, res: Response, next: NextFunction) => {
   const { user: { _id }, body } = req;
   User.findByIdAndUpdate(_id, body, { new: true, runValidators: true })
     .orFail(() => new NotFoundError('Пользователь по заданному id отсутствует в базе'))
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send( user))
     .catch(next);
 };
 

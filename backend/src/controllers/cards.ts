@@ -8,7 +8,7 @@ import ForbiddenError from '../errors/forbidden-error';
 // GET /cards
 const getCards = (req: Request, res: Response, next: NextFunction) => {
   Card.find({})
-    .then((cards) => res.send({ data: cards }))
+    .then((cards) => res.send(cards))
     .catch(next);
 };
 
@@ -17,7 +17,7 @@ const createCard = (req: Request, res: Response, next: NextFunction) => {
   const owner = req.user._id;
   const { name, link } = req.body;
   Card.create({ name, link, owner })
-    .then((card) => res.status(201).send({ data: card }))
+    .then((card) => res.status(201).send( card ))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError(err.message));
@@ -38,7 +38,7 @@ const deleteCard = (req: Request, res: Response, next: NextFunction) => {
         throw new ForbiddenError('Нельзя удалить чужую карточку');
       } else {
         return Card.deleteOne({ _id: card._id })
-          .then(() => res.send({ data: card }));
+          .then(() => res.send(card));
       }
     })
     .catch(next);
@@ -49,7 +49,7 @@ const updateLike = (req: Request, res: Response, next: NextFunction, method: str
   Card.findByIdAndUpdate(id, { [method]: { likes: req.user._id } }, { new: true })
     .orFail(() => new NotFoundError('Нет карточки по заданному id'))
     .then((card) => {
-      res.send({ data: card });
+      res.send(card);
     })
     .catch(next);
 };

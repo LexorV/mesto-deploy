@@ -8,8 +8,10 @@ interface JwtPayload {
   _id: string
 }
 
-const auth = (req: Request, res: Response, next: NextFunction) => {
-  const token = req.cookies.jwt;
+
+const auth = (req: any, res: Response, next: NextFunction) => {
+  const { authorization } = req.headers;
+  const token = authorization.replace('Bearer ', '');
   let payload: JwtPayload | null = null;
   try {
     payload = jwt.verify(token, JWT_SECRET) as JwtPayload;
