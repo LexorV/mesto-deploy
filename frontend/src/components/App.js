@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, useHistory, Switch } from "react-router-dom";
+import { Route, useHistory, Switch, useLocation } from "react-router-dom";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -24,6 +24,7 @@ function App() {
     React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [cards, setCards] = React.useState([]);
+  const [isAuth, setIsAuth] = React.useState(false);
 
   // В корневом компоненте App создана стейт-переменная currentUser. Она используется в качестве значения для провайдера контекста.
   const [currentUser, setCurrentUser] = React.useState({});
@@ -34,9 +35,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   //В компоненты добавлены новые стейт-переменные: email — в компонент App
   const [email, setEmail] = React.useState("");
-
   const history = useHistory();
-
+  const location = useLocation()
   // Запрос к API за информацией о пользователе и массиве карточек выполняется единожды, при монтировании.
   React.useEffect(() => {
     api
@@ -46,7 +46,7 @@ function App() {
         setCards(cardData);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [location]);
 
   // при монтировании App описан эффект, проверяющий наличие токена и его валидности
   React.useEffect(() => {
@@ -57,6 +57,7 @@ function App() {
         .then((res) => {
           setEmail(res.data.email);
           setIsLoggedIn(true);
+          setIsAuth(true);
           history.push("/");
         })
         .catch((err) => {
@@ -65,6 +66,7 @@ function App() {
         });
     }
   }, [history]);
+
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
