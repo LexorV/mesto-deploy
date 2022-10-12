@@ -111,13 +111,10 @@ function App() {
   }
 
   function handleCardLike(card) {
-    console.log(currentUser)
-    console.log(card)
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     api
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
-        console.log(newCard)
         setCards((cards) =>
           cards.map((c) => (c._id === card._id ? newCard : c))
         );
@@ -140,7 +137,6 @@ function App() {
       .then((newCardFull) => {
         setCards([newCardFull, ...cards]);
         closeAllPopups();
-        console.log(cards)
       })
       .catch((err) => console.log(err));
   }
