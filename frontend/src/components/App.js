@@ -24,7 +24,6 @@ function App() {
     React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [cards, setCards] = React.useState([]);
-  const [isAuth, setIsAuth] = React.useState(false);
 
   // В корневом компоненте App создана стейт-переменная currentUser. Она используется в качестве значения для провайдера контекста.
   const [currentUser, setCurrentUser] = React.useState({});
@@ -57,7 +56,6 @@ function App() {
         .then((res) => {
           setEmail(res.data.email);
           setIsLoggedIn(true);
-          setIsAuth(true);
           history.push("/");
         })
         .catch((err) => {

@@ -105,7 +105,7 @@ class Api {
 }
 
 const api = new Api({
-  address: 'http://localhost:3001',
+  address: 'https://api.mesto-deploy.lex-v.ru',
   groupId: `cohort0`,
   token: localStorage.getItem('jwt'),
 });
