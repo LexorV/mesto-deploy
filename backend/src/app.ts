@@ -1,4 +1,4 @@
-import 'dotenv/config';
+require('dotenv').config()
 import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
@@ -6,12 +6,12 @@ import cookieParser from 'cookie-parser';
 import { errors } from 'celebrate';
 
 import errorHandler from './middlewares/error-handler';
-import { DB_ADDRESS } from './config';
 import routes from './routes';
-
+console.log(process.env.DB_ADDRESS)
 const { PORT = 3001 } = process.env;
 const app = express();
-mongoose.connect(DB_ADDRESS);
+
+mongoose.connect(process.env.DB_ADDRESS ?? 'testServer');
 app.use(cors({
   origin: '*',
 }));

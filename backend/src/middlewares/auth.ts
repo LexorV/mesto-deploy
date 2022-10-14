@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
-import { JWT_SECRET } from '../config';
 import UnauthorizedError from '../errors/unauthorized-error';
 
 // есть файл middlewares/auth.js, в нём мидлвэр для проверки JWT;
@@ -14,7 +13,7 @@ const auth = (req: any, res: Response, next: NextFunction) => {
   const token = authorization.replace('Bearer ', '');
   let payload: JwtPayload | null = null;
   try {
-    payload = jwt.verify(token, JWT_SECRET) as JwtPayload;
+    payload = jwt.verify(token, process.env.JWT_SECRET ?? 'JWT') as JwtPayload;
     req.user = payload;
     next();
   } catch (e) {
