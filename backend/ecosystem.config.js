@@ -15,7 +15,7 @@ module.exports = {
       ref: DEPLOY_REF,
       ssh_options: "StrictHostKeyChecking=no",
       port: DEPLOY_PORT,
-      repo: 'https://github.com/LexorV/web-plus-pm2-deploy',
+      repo: 'https://github.com/LexorV/mesto-deploy',
       path: DEPLOY_PATH,
       'pre-deploy': `scp -P ${DEPLOY_PORT} .env ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}`,
       'post-deploy': ' cd backend && npm i && npm run build',

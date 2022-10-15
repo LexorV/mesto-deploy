@@ -7,7 +7,6 @@ import { errors } from 'celebrate';
 
 import errorHandler from './middlewares/error-handler';
 import routes from './routes';
-console.log(process.env.DB_ADDRESS)
 const { PORT = 3001 } = process.env;
 const app = express();
 
